@@ -5,36 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-
     <link
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
       rel="stylesheet"
     />
 
-    <style>
-      .app {
-        position: relative;
-        z-index: 10;
-      }
-
-      .app:before {
-        position: absolute;
-        z-index: -1;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        content: "";
-        background-color: transparent;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)'/%3E%3C/svg%3E");
-        background-repeat: repeat;
-        opacity: 0.1;
-      }
-    </style>
+    <script type="module" src="./src/main.js" defer></script>
+    <link rel="stylesheet" href="./src/style.css" />
   </head>
-  <body class="bg-[#fcfbf7] font-[Quicksand] text-zinc-400">
+  <body class="font-[Quicksand] text-zinc-400">
     <div class="gap-[20px] p-[20px] grid grid-cols-[1fr,320px] app">
       <div
         class="bg-white text-[#f6aca0] p-4 text-4xl font-[800] shadow-sm border-4 border-zinc-100 min-h-[calc(100vh-40px)] rounded-2xl"
