@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="./src/style.css" />
   </head>
   <body class="font-[Quicksand] bg-body text-zinc-400">
-    <div class="gap-[20px] p-[20px] grid grid-cols-[1fr,350px] app">
+    <div class="gap-[20px] p-[20px] grid grid-cols-[1fr,380px] app">
       <div
         class="bg-white shadow-widget border-4 border-[#EDCDBB] text-accent p-4 text-4xl font-[800] min-h-[calc(100vh-40px)] rounded-2xl"
       >
@@ -23,7 +23,7 @@
 
       <div class="flex flex-col gap-[20px]">
         <div
-          class="bg-white border-4 border-[#EDCDBB] rounded-2xl px-[25px] py-[25px] shadow-widget"
+          class="bg-white border-4 border-[#EDCDBB] rounded-2xl px-[25px] py-[20px] shadow-widget"
         >
           <div class="text-zinc-600 text-xl font-[900]">Cooozy</div>
           <div class="text-sm mt-1 font-bold">Matise & Sadko</div>
@@ -100,7 +100,7 @@
         </div>
 
         <div
-          class="bg-white border-4 border-[#EDCDBB] rounded-2xl px-[25px] py-[25px] shadow-widget"
+          class="bg-white border-4 border-[#EDCDBB] rounded-2xl px-[20px] py-[20px] shadow-widget"
         >
           <div
             class="grid text-center text-sm font-bold grid-cols-[repeat(6,1fr)]"
@@ -119,11 +119,36 @@
         </div>
 
         <div
-          class="bg-white border-4 border-[#EDCDBB] rounded-2xl px-[25px] py-[25px] shadow-widget"
+          class="bg-white border-4 flex justify-between min-h-[300px] flex-col border-[#EDCDBB] rounded-2xl px-[20px] py-[20px] shadow-widget"
         >
-          <h2 class="font-bold text-2xl">Tasks</h2>
+          <div
+            class="bg-accent/20 border-r-[10px] flex gap-[12px] border-accent text-accent p-3 font-bold rounded-xl"
+          >
+            <button
+              aria-label="Make task done"
+              class="w-[22px] h-[22px] border-[3px] border-accent/50 rounded-lg"
+            ></button>
+            Hello World
+          </div>
 
-          <div class="mt-[14px]">Hi</div>
+          <div class="relative">
+            <svg
+              class="w-[28px] text-accent/60 top-3.5 right-3.5 absolute"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22ZM12 8.25C12.4142 8.25 12.75 8.58579 12.75 9V11.25H15C15.4142 11.25 15.75 11.5858 15.75 12C15.75 12.4142 15.4142 12.75 15 12.75H12.75L12.75 15C12.75 15.4142 12.4142 15.75 12 15.75C11.5858 15.75 11.25 15.4142 11.25 15V12.75H9C8.58579 12.75 8.25 12.4142 8.25 12C8.25 11.5858 8.58579 11.25 9 11.25H11.25L11.25 9C11.25 8.58579 11.5858 8.25 12 8.25Z"
+                fill="currentColor"
+              />
+            </svg>
+            <input
+              type="text"
+              placeholder="Task name"
+              class="bg-accent/10 border-4 border-accent/20 focus:border-accent/80 pr-12 font-bold rounded-2xl placeholder:text-accent/50 text-accent w-full p-3 outline-none"
+            />
+          </div>
         </div>
       </div>
     </div>
