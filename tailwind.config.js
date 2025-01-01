@@ -2,7 +2,15 @@
 export default {
   content: ["./index.html"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        accent: "#BF9270",
+        body: "#FFEDDB",
+      },
+      boxShadow: {
+        widget: "6.5px 6.5px #EDCDBB",
+      },
+    },
   },
   plugins: [],
 };

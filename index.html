@@ -13,17 +13,17 @@
     <script type="module" src="./src/main.js" defer></script>
     <link rel="stylesheet" href="./src/style.css" />
   </head>
-  <body class="font-[Quicksand] text-zinc-400">
-    <div class="gap-[20px] p-[20px] grid grid-cols-[1fr,320px] app">
+  <body class="font-[Quicksand] bg-body text-zinc-400">
+    <div class="gap-[20px] p-[20px] grid grid-cols-[1fr,350px] app">
       <div
-        class="bg-white text-[#f6aca0] p-4 text-4xl font-[800] shadow-sm border-4 border-zinc-100 min-h-[calc(100vh-40px)] rounded-2xl"
+        class="bg-white shadow-widget border-4 border-[#EDCDBB] text-accent p-4 text-4xl font-[800] min-h-[calc(100vh-40px)] rounded-2xl"
       >
         Hi
       </div>
 
       <div class="flex flex-col gap-[20px]">
         <div
-          class="bg-white border-4 border-zinc-100 rounded-2xl px-[25px] py-[25px] shadow-sm"
+          class="bg-white border-4 border-[#EDCDBB] rounded-2xl px-[25px] py-[25px] shadow-widget"
         >
           <div class="text-zinc-600 text-xl font-[900]">Cooozy</div>
           <div class="text-sm mt-1 font-bold">Matise & Sadko</div>
@@ -31,7 +31,7 @@
           <div class="mt-[20px]">
             <div class="h-[6px] relative w-full bg-zinc-100 rounded-full">
               <div
-                class="absolute top-0 left-0 w-1/2 h-full bg-[#f6aca0] rounded-full"
+                class="absolute top-0 left-0 w-1/2 h-full bg-accent rounded-full"
               ></div>
             </div>
           </div>
@@ -42,7 +42,7 @@
               class="rounded-full bg-[f9f2ec] w-[44px] h-[44px] flex items-center justify-center"
             >
               <svg
-                class="w-[16px] rotate-[60deg] text-[#f6aca0]"
+                class="w-[16px] rotate-[60deg] text-accent"
                 viewBox="0 0 24 24"
                 fill="none"
               >
@@ -52,7 +52,7 @@
                 />
               </svg>
               <svg
-                class="w-[16px] rotate-[60deg] -ml-1.5 text-[#f6aca0]"
+                class="w-[16px] rotate-[60deg] -ml-1.5 text-accent"
                 viewBox="0 0 24 24"
                 fill="none"
               >
@@ -65,7 +65,7 @@
 
             <button
               aria-label="Play music"
-              class="bg-[#f6aca0] rounded-full w-[44px] h-[44px] flex items-center justify-center"
+              class="bg-accent rounded-full w-[44px] h-[44px] flex items-center justify-center"
             >
               <svg class="w-[18px] text-white" viewBox="0 0 24 24" fill="none">
                 <path
@@ -79,18 +79,14 @@
               aria-label="Next Track"
               class="rounded-full w-[44px] h-[44px] flex items-center justify-center"
             >
-              <svg
-                class="w-[16px] text-[#f6aca0]"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
+              <svg class="w-[16px] text-accent" viewBox="0 0 24 24" fill="none">
                 <path
                   d="M21.4086 9.35258C23.5305 10.5065 23.5305 13.4935 21.4086 14.6474L8.59662 21.6145C6.53435 22.736 4 21.2763 4 18.9671L4 5.0329C4 2.72368 6.53435 1.26402 8.59661 2.38548L21.4086 9.35258Z"
                   fill="currentColor"
                 />
               </svg>
               <svg
-                class="w-[16px] -ml-1.5 text-[#f6aca0]"
+                class="w-[16px] -ml-1.5 text-accent"
                 viewBox="0 0 24 24"
                 fill="none"
               >
@@ -104,7 +100,7 @@
         </div>
 
         <div
-          class="bg-white border-4 border-zinc-100 rounded-2xl px-[25px] py-[25px] shadow-sm"
+          class="bg-white border-4 border-[#EDCDBB] rounded-2xl px-[25px] py-[25px] shadow-widget"
         >
           <div
             class="grid text-center text-sm font-bold grid-cols-[repeat(6,1fr)]"
@@ -117,35 +113,13 @@
             <span>Sun</span>
           </div>
           <div class="grid gap-[5px] grid-cols-[repeat(6,1fr)] mt-[10px]">
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200/20"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200/60"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200/80"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
-            <div class="w-1/7 rounded-md h-[30px] bg-red-200"></div>
+            <div class="w-1/7 rounded-md h-[30px] bg-accent/50"></div>
+            <div class="w-1/7 rounded-md h-[30px] bg-accent/80"></div>
           </div>
         </div>
 
         <div
-          class="bg-white border-4 border-zinc-100 rounded-2xl px-[25px] py-[25px] shadow-sm"
+          class="bg-white border-4 border-[#EDCDBB] rounded-2xl px-[25px] py-[25px] shadow-widget"
         >
           <h2 class="font-bold text-2xl">Tasks</h2>
 
