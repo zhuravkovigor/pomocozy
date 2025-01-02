@@ -26,9 +26,9 @@ scene.add(cube);
 
 // Position the camera on top of the cube and slightly change its position by x
 camera.position.set(
-  cube.position.x + 2,
-  cube.position.y + 3,
-  cube.position.z + 4
+  cube.position.x + 3,
+  cube.position.y + 4,
+  cube.position.z + 5
 );
 camera.lookAt(cube.position);
 
@@ -37,6 +37,8 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableRotate = false; // Disable rotation
 controls.enableZoom = false; // Disable zoom
 controls.enablePan = false; // Disable panning
+// move only by x position
+controls.minPolarAngle = Math.PI / 2;
 
 // Add a sky
 const sky = new Sky();
@@ -80,37 +82,42 @@ window.addEventListener("keyup", (event) => {
   }
 });
 
-// Track if the mouse is over the game container
-let mouseOverGameContainer = false;
+// Mouse controls
+let isMouseDown = false;
 
-gameContainer.addEventListener("mouseenter", () => {
-  mouseOverGameContainer = true;
+window.addEventListener("mousedown", () => {
+  isMouseDown = true;
 });
 
-gameContainer.addEventListener("mouseleave", () => {
-  mouseOverGameContainer = false;
+window.addEventListener("mouseup", () => {
+  isMouseDown = false;
+});
+
+window.addEventListener("mousemove", (event) => {
+  if (isMouseDown) {
+    camera.position.x -= event.movementX * 0.01;
+    camera.position.z -= event.movementY * 0.01;
+  }
 });
 
 // Animation loop
 function animate() {
   requestAnimationFrame(animate);
 
-  // Update camera position based on keyboard input only if mouse is over the game container
-  if (mouseOverGameContainer) {
-    if (keys.ArrowRight || keys.KeyD) {
-      camera.position.x += 0.1;
-    }
-    if (keys.ArrowLeft || keys.KeyA) {
-      camera.position.x -= 0.1;
-    }
+  // Update camera position based on keyboard input
+  if (keys.ArrowRight || keys.KeyD) {
+    camera.position.x += 0.1;
+  }
+  if (keys.ArrowLeft || keys.KeyA) {
+    camera.position.x -= 0.1;
+  }
 
-    if (keys.ArrowUp || keys.KeyW) {
-      camera.position.z -= 0.1;
-    }
+  if (keys.ArrowUp || keys.KeyW) {
+    camera.position.z -= 0.1;
+  }
 
-    if (keys.ArrowDown || keys.KeyS) {
-      camera.position.z += 0.1;
-    }
+  if (keys.ArrowDown || keys.KeyS) {
+    camera.position.z += 0.1;
   }
 
   renderer.render(scene, camera);
