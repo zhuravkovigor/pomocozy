@@ -61,39 +61,56 @@ const keys = {
   ArrowDown: false,
   ArrowLeft: false,
   ArrowRight: false,
+  KeyW: false,
+  KeyA: false,
+  KeyS: false,
+  KeyD: false,
 };
 
 // Event listeners for keyboard controls
 window.addEventListener("keydown", (event) => {
-  if (event.key in keys) {
-    keys[event.key] = true;
+  if (event.code in keys) {
+    keys[event.code] = true;
   }
 });
 
 window.addEventListener("keyup", (event) => {
-  if (event.key in keys) {
-    keys[event.key] = false;
+  if (event.code in keys) {
+    keys[event.code] = false;
   }
+});
+
+// Track if the mouse is over the game container
+let mouseOverGameContainer = false;
+
+gameContainer.addEventListener("mouseenter", () => {
+  mouseOverGameContainer = true;
+});
+
+gameContainer.addEventListener("mouseleave", () => {
+  mouseOverGameContainer = false;
 });
 
 // Animation loop
 function animate() {
   requestAnimationFrame(animate);
 
-  // Update camera position based on keyboard input
-  if (keys.ArrowRight) {
-    camera.position.x += 0.1;
-  }
-  if (keys.ArrowLeft) {
-    camera.position.x -= 0.1;
-  }
+  // Update camera position based on keyboard input only if mouse is over the game container
+  if (mouseOverGameContainer) {
+    if (keys.ArrowRight || keys.KeyD) {
+      camera.position.x += 0.1;
+    }
+    if (keys.ArrowLeft || keys.KeyA) {
+      camera.position.x -= 0.1;
+    }
 
-  if (keys.ArrowUp) {
-    camera.position.z -= 0.1;
-  }
+    if (keys.ArrowUp || keys.KeyW) {
+      camera.position.z -= 0.1;
+    }
 
-  if (keys.ArrowDown) {
-    camera.position.z += 0.1;
+    if (keys.ArrowDown || keys.KeyS) {
+      camera.position.z += 0.1;
+    }
   }
 
   renderer.render(scene, camera);
