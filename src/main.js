@@ -13,10 +13,10 @@ const scene = new THREE.Scene();
 const aspect = width / height;
 const frustumSize = 10;
 const camera = new THREE.OrthographicCamera(
-  (frustumSize * aspect) / -2,
-  (frustumSize * aspect) / 2,
-  frustumSize / 2,
-  frustumSize / -2,
+  (frustumSize * aspect) / -3,
+  (frustumSize * aspect) / 3,
+  frustumSize / 3,
+  frustumSize / -3,
   0.1
 );
 
@@ -183,7 +183,7 @@ for (let i = -gridSize / 2; i < gridSize / 2; i++) {
 }
 
 // Set camera to look at the center of the grid
-camera.lookAt(new THREE.Vector3(-4, -4, 0));
+camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 // Raycaster for detecting hover
 const raycaster = new THREE.Raycaster();
