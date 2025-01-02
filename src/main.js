@@ -12,11 +12,12 @@ const scene = new THREE.Scene();
 
 const aspect = width / height;
 const frustumSize = 10;
+const cameraSize = 3;
 const camera = new THREE.OrthographicCamera(
-  (frustumSize * aspect) / -3,
-  (frustumSize * aspect) / 3,
-  frustumSize / 3,
-  frustumSize / -3,
+  (frustumSize * aspect) / -cameraSize,
+  (frustumSize * aspect) / cameraSize,
+  frustumSize / cameraSize,
+  frustumSize / -cameraSize,
   0.1
 );
 
