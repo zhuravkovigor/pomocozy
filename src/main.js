@@ -10,8 +10,15 @@ const height = gameContainer.clientHeight;
 // Create the scene
 const scene = new THREE.Scene();
 
-// Create a camera
-const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+const aspect = width / height;
+const frustumSize = 10;
+const camera = new THREE.OrthographicCamera(
+  (frustumSize * aspect) / -2,
+  (frustumSize * aspect) / 2,
+  frustumSize / 2,
+  frustumSize / -2,
+  0.1
+);
 
 // Create a renderer
 const renderer = new THREE.WebGLRenderer();
@@ -24,21 +31,17 @@ const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
-// Position the camera on top of the cube and slightly change its position by x
-camera.position.set(
-  cube.position.x + 3,
-  cube.position.y + 4,
-  cube.position.z + 5
-);
-camera.lookAt(cube.position);
+// Position the camera to get an isometric view
+// make it closer to the scene
+
+camera.position.set(5, 5, 5);
+camera.lookAt(scene.position);
 
 // Add orbit controls
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableRotate = false; // Disable rotation
 controls.enableZoom = false; // Disable zoom
 controls.enablePan = false; // Disable panning
-// move only by x position
-controls.minPolarAngle = Math.PI / 2;
 
 // Add a sky
 const sky = new Sky();
@@ -93,33 +96,54 @@ window.addEventListener("mouseup", () => {
   isMouseDown = false;
 });
 
+let targetX = camera.position.x;
+let targetZ = camera.position.z;
+
 window.addEventListener("mousemove", (event) => {
   if (isMouseDown) {
-    camera.position.x -= event.movementX * 0.01;
-    camera.position.z -= event.movementY * 0.01;
+    const angle = Math.PI / 4; // 45 degrees for isometric view
+    targetX -=
+      event.movementX * 0.02 * Math.cos(angle) +
+      event.movementY * 0.02 * Math.sin(angle);
+    targetZ +=
+      event.movementX * 0.02 * Math.sin(angle) -
+      event.movementY * 0.02 * Math.cos(angle);
   }
 });
+
+function smoothScroll() {
+  camera.position.x += (targetX - camera.position.x) * 0.1;
+  camera.position.z += (targetZ - camera.position.z) * 0.1;
+}
 
 // Animation loop
 function animate() {
   requestAnimationFrame(animate);
 
-  // Update camera position based on keyboard input
+  // Update target position based on keyboard input
+  const moveSpeed = 0.1;
+  const angle = Math.PI / 4; // 45 degrees for isometric view
+
   if (keys.ArrowRight || keys.KeyD) {
-    camera.position.x += 0.1;
+    targetX += moveSpeed * Math.cos(angle);
+    targetZ -= moveSpeed * Math.sin(angle);
   }
   if (keys.ArrowLeft || keys.KeyA) {
-    camera.position.x -= 0.1;
+    targetX -= moveSpeed * Math.cos(angle);
+    targetZ += moveSpeed * Math.sin(angle);
   }
 
   if (keys.ArrowUp || keys.KeyW) {
-    camera.position.z -= 0.1;
+    targetX -= moveSpeed * Math.sin(angle);
+    targetZ -= moveSpeed * Math.cos(angle);
   }
 
   if (keys.ArrowDown || keys.KeyS) {
-    camera.position.z += 0.1;
+    targetX += moveSpeed * Math.sin(angle);
+    targetZ += moveSpeed * Math.cos(angle);
   }
 
+  smoothScroll();
   renderer.render(scene, camera);
 }
 
@@ -129,7 +153,58 @@ animate();
 window.addEventListener("resize", () => {
   const width = gameContainer.clientWidth;
   const height = gameContainer.clientHeight;
-  camera.aspect = width / height;
+  const aspect = width / height;
+  camera.left = (frustumSize * aspect) / -2;
+  camera.right = (frustumSize * aspect) / 2;
+  camera.top = frustumSize / 2;
+  camera.bottom = frustumSize / -2;
   camera.updateProjectionMatrix();
   renderer.setSize(width, height);
 });
+
+// Create a grid of planes
+const planeSize = 1;
+const gridSize = 40;
+const planes = [];
+
+for (let i = -gridSize / 2; i < gridSize / 2; i++) {
+  for (let j = -gridSize / 2; j < gridSize / 2; j++) {
+    const planeGeometry = new THREE.PlaneGeometry(planeSize, planeSize);
+    const planeMaterial = new THREE.MeshBasicMaterial({
+      color: 0x808080,
+      side: THREE.DoubleSide,
+    });
+    const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+    plane.position.set(i * planeSize, 0, j * planeSize);
+    plane.rotation.x = -Math.PI / 2;
+    scene.add(plane);
+    planes.push(plane);
+  }
+}
+
+// Set camera to look at the center of the grid
+camera.lookAt(new THREE.Vector3(-4, -4, 0));
+
+// Raycaster for detecting hover
+const raycaster = new THREE.Raycaster();
+raycaster.params.Points.threshold = 0.1; // Increase precision
+const mouse = new THREE.Vector2();
+
+function onMouseMove(event) {
+  const rect = gameContainer.getBoundingClientRect();
+  mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+  mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObjects(planes);
+
+  planes.forEach((plane) => {
+    plane.material.color.set(0x808080); // Reset color
+  });
+
+  if (intersects.length > 0) {
+    intersects[0].object.material.color.set(0xffffff); // Highlight color
+  }
+}
+
+window.addEventListener("mousemove", onMouseMove);
