@@ -163,16 +163,30 @@ window.addEventListener("resize", () => {
   renderer.setSize(width, height);
 });
 
-// Create a grid of planes
 const planeSize = 1;
-const gridSize = 40;
+const map = [
+  [0, 1, 2, 3, 2, 3, 0, 1],
+  [3, 2, 1, 0, 2, 3, 0, 1],
+  [1, 0, 3, 2, 2, 3, 0, 1],
+  [2, 3, 0, 1, 2, 3, 0, 1],
+  [0, 1, 2, 3, 2, 3, 0, 1],
+  [3, 2, 1, 0, 2, 3, 0, 1],
+  [1, 0, 3, 2, 2, 3, 0, 1],
+  [2, 3, 0, 1, 2, 3, 0, 1],
+];
+const colorMap = {
+  0: 0x808080,
+  1: 0xff0000,
+  2: 0x00ff00,
+  3: 0x0000ff,
+};
 const planes = [];
 
-for (let i = -gridSize / 2; i < gridSize / 2; i++) {
-  for (let j = -gridSize / 2; j < gridSize / 2; j++) {
+for (let i = 0; i < map.length; i++) {
+  for (let j = 0; j < map[i].length; j++) {
     const planeGeometry = new THREE.PlaneGeometry(planeSize, planeSize);
     const planeMaterial = new THREE.MeshBasicMaterial({
-      color: 0x808080,
+      color: colorMap[map[i][j]],
       side: THREE.DoubleSide,
     });
     const plane = new THREE.Mesh(planeGeometry, planeMaterial);
@@ -190,6 +204,7 @@ camera.lookAt(new THREE.Vector3(0, 0, 0));
 const raycaster = new THREE.Raycaster();
 raycaster.params.Points.threshold = 0.1; // Increase precision
 const mouse = new THREE.Vector2();
+let previousIntersected = null;
 
 function onMouseMove(event) {
   const rect = gameContainer.getBoundingClientRect();
@@ -199,12 +214,21 @@ function onMouseMove(event) {
   raycaster.setFromCamera(mouse, camera);
   const intersects = raycaster.intersectObjects(planes);
 
-  planes.forEach((plane) => {
-    plane.material.color.set(0x808080); // Reset color
-  });
+  if (previousIntersected) {
+    previousIntersected.object.material.color.set(
+      colorMap[
+        map[previousIntersected.object.position.x][
+          previousIntersected.object.position.z
+        ]
+      ]
+    );
+  }
 
   if (intersects.length > 0) {
+    previousIntersected = intersects[0];
     intersects[0].object.material.color.set(0xffffff); // Highlight color
+  } else {
+    previousIntersected = null;
   }
 }
 
