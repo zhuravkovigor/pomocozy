@@ -12,7 +12,7 @@ const scene = new THREE.Scene();
 
 const aspect = width / height;
 const frustumSize = 10;
-const cameraSize = 3;
+const cameraSize = 2.2;
 const camera = new THREE.OrthographicCamera(
   (frustumSize * aspect) / -cameraSize,
   (frustumSize * aspect) / cameraSize,
@@ -204,7 +204,8 @@ camera.lookAt(new THREE.Vector3(0, 0, 0));
 const raycaster = new THREE.Raycaster();
 raycaster.params.Points.threshold = 0.1; // Increase precision
 const mouse = new THREE.Vector2();
-let previousIntersected = null;
+let previousIntersected = [];
+let hoverMode = "home"; // Default hover mode
 
 function onMouseMove(event) {
   const rect = gameContainer.getBoundingClientRect();
@@ -214,22 +215,47 @@ function onMouseMove(event) {
   raycaster.setFromCamera(mouse, camera);
   const intersects = raycaster.intersectObjects(planes);
 
-  if (previousIntersected) {
-    previousIntersected.object.material.color.set(
-      colorMap[
-        map[previousIntersected.object.position.x][
-          previousIntersected.object.position.z
-        ]
-      ]
+  // Reset previous intersected planes
+  previousIntersected.forEach((intersect) => {
+    intersect.object.material.color.set(
+      colorMap[map[intersect.object.position.x][intersect.object.position.z]]
     );
-  }
+  });
+  previousIntersected = [];
 
   if (intersects.length > 0) {
-    previousIntersected = intersects[0];
-    intersects[0].object.material.color.set(0xffffff); // Highlight color
-  } else {
-    previousIntersected = null;
+    const intersected = intersects[0];
+    const x = intersected.object.position.x;
+    const z = intersected.object.position.z;
+
+    if (hoverMode === "tree") {
+      // Highlight 1x1 grid
+      intersected.object.material.color.set(0xffffff); // Highlight color
+      previousIntersected.push({ object: intersected.object });
+    } else if (hoverMode === "home") {
+      // Highlight 3x3 grid
+      for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+          const plane = planes.find(
+            (p) => p.position.x === x + i && p.position.z === z + j
+          );
+          if (plane) {
+            plane.material.color.set(0xffffff); // Highlight color
+            previousIntersected.push({ object: plane });
+          }
+        }
+      }
+    }
   }
 }
 
 window.addEventListener("mousemove", onMouseMove);
+
+// Event listeners to switch hover modes
+window.addEventListener("keydown", (event) => {
+  if (event.code === "KeyT") {
+    hoverMode = "tree";
+  } else if (event.code === "KeyH") {
+    hoverMode = "home";
+  }
+});
