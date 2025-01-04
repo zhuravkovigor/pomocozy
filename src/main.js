@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { Sky } from "three/examples/jsm/objects/Sky.js";
 
 // Get the game container
@@ -39,10 +38,6 @@ camera.position.set(5, 5, 5);
 camera.lookAt(scene.position);
 
 // Add orbit controls
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableRotate = false; // Disable rotation
-controls.enableZoom = false; // Disable zoom
-controls.enablePan = false; // Disable panning
 
 // Add a sky
 const sky = new Sky();
