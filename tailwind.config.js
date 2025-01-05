@@ -9,6 +9,7 @@ export default {
       },
       boxShadow: {
         widget: "6.5px 6.5px #EDCDBB",
+        ui: "0px 6px #EDCDBB",
       },
     },
   },

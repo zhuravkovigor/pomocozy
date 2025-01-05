@@ -1,5 +1,15 @@
 import * as THREE from "three";
 import { Sky } from "three/examples/jsm/objects/Sky.js";
+import Alpine from "alpinejs";
+
+document.addEventListener("alpine:init", () => {
+  Alpine.data("game", () => ({
+    coins: 9999,
+  }));
+});
+
+window.Alpine = Alpine;
+Alpine.start();
 
 // Get the game container
 const gameContainer = document.getElementById("game");

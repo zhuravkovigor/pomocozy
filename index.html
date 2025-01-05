@@ -11,14 +11,30 @@
     />
 
     <script type="module" src="./src/main.js" defer></script>
+
     <link rel="stylesheet" href="./src/style.css" />
   </head>
   <body class="font-[Quicksand] bg-body text-zinc-400">
     <div class="gap-[20px] p-[20px] grid grid-cols-[1fr,380px] app">
       <div
-        id="game"
-        class="bg-white shadow-widget border-4 border-[#EDCDBB] text-accent overflow-hidden text-4xl font-[800] min-h-[calc(100vh-40px)] rounded-2xl"
-      ></div>
+        class="shadow-widget relative border-4 border-[#EDCDBB] text-accent overflow-hidden text-4xl font-[800] min-h-[calc(100vh-40px)] rounded-2xl"
+      >
+        <div
+          x-data="game"
+          class="absolute top-[10px] shadow-ui right-[10px] flex gap-[15px] bg-white border-4 border-[#EDCDBB] rounded-2xl px-[15px] py-[10px]"
+        >
+          <img src="./coin.svg" class="w-[32px]" alt="" />
+          <span x-text="coins"></span>
+        </div>
+
+        <button
+          aria-label="Open Shop"
+          class="absolute bottom-[15px] shadow-ui text-2xl hover:bg-zinc-200 cursor-pointer uppercase left-[10px] flex flex-col items-center gap-[15px] bg-white border-4 border-[#EDCDBB] rounded-2xl px-[15px] py-[10px]"
+        >
+          <img src="./shop.svg" class="w-[56px]" alt="" />
+        </button>
+        <div class="w-full h-full" id="game"></div>
+      </div>
 
       <div class="flex flex-col gap-[20px]">
         <div
