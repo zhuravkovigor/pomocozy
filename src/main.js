@@ -78,15 +78,28 @@ const keys = {
   KeyD: false,
 };
 
+// Track if the mouse is inside the game container
+let isMouseInside = false;
+
+gameContainer.addEventListener("mouseenter", () => {
+  isMouseInside = true;
+});
+
+gameContainer.addEventListener("mouseleave", () => {
+  isMouseInside = false;
+
+  // stop movementX and movementY
+});
+
 // Event listeners for keyboard controls
 window.addEventListener("keydown", (event) => {
-  if (event.code in keys) {
+  if (isMouseInside && event.code in keys) {
     keys[event.code] = true;
   }
 });
 
 window.addEventListener("keyup", (event) => {
-  if (event.code in keys) {
+  if (isMouseInside && event.code in keys) {
     keys[event.code] = false;
   }
 });
@@ -106,7 +119,7 @@ let targetX = camera.position.x;
 let targetZ = camera.position.z;
 
 window.addEventListener("mousemove", (event) => {
-  if (isMouseDown) {
+  if (isMouseDown && isMouseInside) {
     const angle = Math.PI / 4; // 45 degrees for isometric view
     targetX -=
       event.movementX * 0.02 * Math.cos(angle) +
