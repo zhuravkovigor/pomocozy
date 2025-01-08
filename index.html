@@ -34,7 +34,7 @@
             class="absolute top-0 left-0 w-full h-full border-4 p-5 border-[#EDCDBB] rounded-xl bg-white shadow-ui"
           ></div>
           <div
-            class="border-4 border-[#EDCDBB] rounded-xl p-2 inline-flex absolute -top-[30px] -right-[30px] bg-white cursor-pointer"
+            class="border-4 z-30 border-[#EDCDBB] rounded-xl p-2 inline-flex absolute -top-[30px] -right-[30px] bg-white cursor-pointer"
           >
             <svg class="w-[32px]" viewBox="0 0 24 24" version="1.1">
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -56,16 +56,64 @@
           </div>
 
           <div
-            class="border-4 border-[#EDCDBB] rounded-xl p-2 inline-flex absolute -top-[50px] left-1/2 -translate-x-1/2 px-5 leading-relaxed bg-white shadow-ui"
+            class="border-4 z-30 border-[#EDCDBB] rounded-xl p-2 inline-flex absolute -top-[50px] left-1/2 -translate-x-1/2 px-5 leading-relaxed bg-white shadow-ui"
           >
             Shop
           </div>
-
+          <div
+            class="grid relative grid-cols-[1fr,300px] items-start justify-start z-20"
+          >
+            <div class="px-10 pt-[50px] text-lg grid grid-cols-2 gap-[20px]">
+              <div
+                class="border-[#EDCDBB] flex flex-col rounded-lg shadow-ui border-4"
+              >
+                <div class="self-center py-[45px]">House</div>
+                <div class="flex gap-[5px] self-center mt-[10px] pb-[10px]">
+                  <img src="./coin.svg" class="w-[24px]" />
+                  120
+                </div>
+              </div>
+              <div
+                class="border-[#EDCDBB] flex flex-col rounded-lg shadow-ui border-4"
+              >
+                <div class="self-center py-[45px]">House</div>
+                <div class="flex gap-[5px] self-center mt-[10px] pb-[10px]">
+                  <img src="./coin.svg" class="w-[24px]" />
+                  120
+                </div>
+              </div>
+              <div
+                class="border-[#EDCDBB] flex flex-col rounded-lg shadow-ui border-4"
+              >
+                <div class="self-center py-[45px]">House</div>
+                <div class="flex gap-[5px] self-center mt-[10px] pb-[10px]">
+                  <img src="./coin.svg" class="w-[24px]" />
+                  120
+                </div>
+              </div>
+              <div
+                class="border-[#EDCDBB] flex flex-col rounded-lg shadow-ui border-4"
+              >
+                <div class="self-center py-[45px]">House</div>
+                <div class="flex gap-[5px] self-center mt-[10px] pb-[10px]">
+                  <img src="./coin.svg" class="w-[24px]" />
+                  120
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-[#FFEDDB] rounded-tr-xl rounded-br-xl mt-1 mr-1 h-[492px] pt-[50px] px-[20px]"
+            >
+              <div class="self-center py-[55px] text-sm">House image</div>
+              <h2 class="text-lg">Tree name</h2>
+              <p class="text-sm mt-2">Some description for the tree</p>
+            </div>
+          </div>
           <div
             class="flex flex-col gap-[12px] absolute top-24 font-bold -left-24 text-xs -z-10"
           >
             <div
-              class="w-[400px] flex-col bg-white border-4 border-[#EDCDBB] rounded-xl p-3"
+              class="w-[450px] cursor-pointer hover:bg-zinc-50 flex-col bg-white border-4 border-[#EDCDBB] rounded-xl p-3"
             >
               <svg viewBox="0 0 24 24" fill="none" class="w-[32px] ml-5">
                 <path
@@ -81,7 +129,7 @@
             </div>
 
             <div
-              class="w-[400px] flex-col items-center bg-white border-4 border-[#EDCDBB] rounded-xl p-3"
+              class="w-[400px] cursor-pointer hover:bg-zinc-50 flex-col items-center bg-white border-4 border-[#EDCDBB] rounded-xl p-3"
             >
               <svg
                 class="w-[32px] ml-[18px]"
@@ -97,7 +145,7 @@
             </div>
 
             <div
-              class="w-[400px] flex-col items-center bg-white border-4 border-[#EDCDBB] rounded-xl p-3"
+              class="w-[400px] flex-col cursor-pointer hover:bg-zinc-50 items-center bg-white border-4 border-[#EDCDBB] rounded-xl p-3"
             >
               <svg
                 class="w-[32px] ml-[18px]"
